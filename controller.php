@@ -88,6 +88,52 @@ if (isset($_POST['create_usuario'])) {
 //GET
 
 //DELETE
+if (isset($_POST['delete_usuario'])) {
+    $usuario_id = mysqli_real_escape_string($conexao, $_POST['delete_usuario']);
+    
+    // Iniciar uma transação para garantir a integridade dos dados
+    $conexao->begin_transaction();
+
+    try {
+        // Excluir registros na tabela periodos_vigencia
+        $sql1 = "DELETE FROM periodos_vigencia WHERE usuario_id='$usuario_id'";
+        $result1 = $conexao->query($sql1);
+        
+        if (!$result1) {
+            throw new Exception("Erro ao deletar da tabela periodos_vigencia: " . mysqli_error($conexao));
+        }
+        
+        // Excluir o usuário da tabela usuarios
+        $sql2 = "DELETE FROM usuarios WHERE id='$usuario_id'";
+        $result2 = $conexao->query($sql1);
+
+        if (!$result2) {
+            throw new Exception("Erro ao deletar da tabela usuarios: " . mysqli_error($conexao));
+        }
+
+        // Se ambas as queries foram executadas com sucesso, confirma a transação
+        $conexao->commit();
+        // mysqli_commit($conexao);
+
+        
+        // echo "Erro x: " . $conexao->error . "<br>";
+        // Mensagem de sucesso
+        $_SESSION['message'] = 'Usuário deletado com sucesso!';
+        header('Location:index.php');
+        exit;
+    } catch (Exception $e) {
+        // Em caso de erro, faz rollback da transação
+        echo "Erro x: " . $conexao->error . "<br>";
+        $conexao->rollback();
+        // mysqli_rollback($conexao);
+        
+        // Exibe a mensagem de erro
+        $_SESSION['message'] = 'Erro ao deletar o usuário: ' . $e->getMessage();
+        header('Location:index.php');
+        exit;
+    }
+}
+
 
 //PUT
 ?>
