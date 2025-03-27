@@ -1,3 +1,23 @@
+<?php
+// Conexão com o banco de dados
+include('conection.php');
+
+// Consulta para pegar os tipos de usuários
+$sql_tipos = 'SELECT * FROM tipos_usuario';
+$tipos = mysqli_query($conexao, $sql_tipos);
+
+// Consulta para pegar os estados
+$sql_estados = 'SELECT * FROM estados';
+$estados = mysqli_query($conexao, $sql_estados);
+
+// Consulta para pegar os municípios
+$sql_municipios = 'SELECT * FROM municipios';
+$municipios = mysqli_query($conexao, $sql_municipios);
+
+// Consulta para pegar as agências
+$sql_agencias = 'SELECT * FROM agencias';
+$agencias = mysqli_query($conexao, $sql_agencias);
+?>
 <!doctype html>
 <html>
     <head>
@@ -65,45 +85,58 @@
             </div>
         </div>
 
-        <!-- Segunda linha (tipo de usuário, estado, município e agência) -->
-        <div class="row mb-3">
+         <!-- Segunda linha (tipo de usuário, estado, município e agência) -->
+         <div class="row mb-3">
             <div class="col-md-3">
                 <label>Tipo de Usuário</label>
                 <select name="tipo_usuario" class="form-select" required>
                     <option value="" disabled selected>Selecione um tipo de usuário</option>
-                    <option value="1">Elaborador</option>
-                    <option value="2">Validador</option>
-                    <option value="3">Validador+</option>
+                    <?php
+                    if (mysqli_num_rows($tipos) > 0) {
+                        while ($tipo = mysqli_fetch_assoc($tipos)) {
+                            echo "<option value='{$tipo['id']}'>{$tipo['tipo']}</option>";
+                        }
+                    }
+                    ?>
                 </select>
             </div>
             <div class="col-md-3">
                 <label>Estado</label>
                 <select name="estado" class="form-select" required>
                     <option value="" disabled selected>Selecione um estado</option>
-                    <option value="1">São Paulo</option>
-                    <option value="2">Rio de Janeiro</option>
-                    <option value="3">Minas Gerais</option>
-                    <option value="4">Bahia</option>
+                    <?php
+                    if (mysqli_num_rows($estados) > 0) {
+                        while ($estado = mysqli_fetch_assoc($estados)) {
+                            echo "<option value='{$estado['id']}'>{$estado['nome']}</option>";
+                        }
+                    }
+                    ?>
                 </select>
             </div>
             <div class="col-md-3">
                 <label>Município</label>
                 <select class="form-select" id="municipio" name="municipio" required>
                     <option value="" disabled selected>Selecione um município</option>
-                    <option value="1">São Paulo</option>
-                    <option value="2">Campinas</option>
-                    <option value="3">Rio de Janeiro</option>
-                    <option value="4">Niterói</option>
+                    <?php
+                    if (mysqli_num_rows($municipios) > 0) {
+                        while ($municipio = mysqli_fetch_assoc($municipios)) {
+                            echo "<option value='{$municipio['id']}'>{$municipio['nome']}</option>";
+                        }
+                    }
+                    ?>
                 </select>
             </div>
             <div class="col-md-3">
                 <label>Agência</label>
                 <select name="agencia" class="form-select" required>
                     <option value="" disabled selected>Selecione uma agência</option>
-                    <option value="1">Agência Paulista</option>
-                    <option value="2">Agência Campinas</option>
-                    <option value="3">Agência Carioca</option>
-                    <option value="4">Agência Niterói</option>
+                    <?php
+                    if (mysqli_num_rows($agencias) > 0) {
+                        while ($agencia = mysqli_fetch_assoc($agencias)) {
+                            echo "<option value='{$agencia['id']}'>{$agencia['nome']}</option>";
+                        }
+                    }
+                    ?>
                 </select>
             </div>
         </div>

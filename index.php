@@ -1,5 +1,6 @@
 <?php
-require 'conection.php';
+// require 'conection.php'
+include('conection.php');
 ?>
 <!doctype html>
 <html lang="en">
