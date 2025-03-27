@@ -109,3 +109,32 @@ INSERT INTO usuario_municipio_agencia (usuario_id, municipio_id, agencia_id) VAL
 (1, 2, 2),
 (2, 3, 3),
 (2, 4, 4);
+
+*/
+
+--queries 2
+
+        SELECT 
+            u.id AS id,
+            u.nome AS nome,
+            u.codigo_acesso AS codigo_acesso,
+            tu.tipo AS tipo_usuario,
+            e.nome AS estado,
+            m.nome AS municipio,
+            a.nome AS agencia,
+            pv.data_inicio,
+            pv.data_fim
+        FROM 
+            usuarios u
+        JOIN 
+            tipos_usuario tu ON u.tipo_usuario_id = tu.id
+        JOIN 
+            usuario_municipio_agencia uma ON u.id = uma.usuario_id
+        JOIN 
+            municipios m ON uma.municipio_id = m.id
+        JOIN 
+            agencias a ON uma.agencia_id = a.id
+        JOIN 
+            estados e ON m.estado_id = e.id
+        JOIN 
+            periodos_vigencia pv ON u.id = pv.usuario_id ;
