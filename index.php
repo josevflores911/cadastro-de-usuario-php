@@ -9,33 +9,8 @@ include('conection.php');
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
-        /* Garante que o fundo cubra a tela inteira */
-        html, body {
-            height: 100%; /* Faz com que o HTML e o Body ocupem toda a altura da janela */
-            margin: 0; /* Remove as margens padrão */
-        }
-
-        body {
-            background: rgb(2,0,36); 
-            background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 54%, rgba(0,102,255,1) 99%);
-            color: white;
-            font-family: Arial, sans-serif;
-            /* display: flex; */
-            /* justify-content: center; */
-            /* align-items: center; */
-            text-align: center;
-            height: 100%;
-        }
-
-        h1 {
-            margin-bottom: 20px;
-        }
-
-        p {
-            font-size: 1.2em;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+    
   </head>
   <body>
 
@@ -109,7 +84,7 @@ include('conection.php');
                       <!-- <a href="" class="btn btn-secondary btn-sm">Visualizar</a> -->
                        <div style="display:flex; flex-direction:row; justify-content:space-around">
                          <div>
-                           <a href="" class="btn btn-success btn-sm">Editar</a>
+                           <a  href="edit-view.php?id=<?=$usuario['id']?>" class="btn btn-success btn-sm">Editar</a>
                          </div>
                          <div>
                            <form action="controller.php" method="POST" class="d-inline">

@@ -1,0 +1,25 @@
+/* Garante que o fundo cubra a tela inteira */
+html, body {
+    height: 100%; /* Faz com que o HTML e o Body ocupem toda a altura da janela */
+    margin: 0; /* Remove as margens padrão */
+}
+
+body {
+    background: rgb(2,0,36); 
+    background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 54%, rgba(0,102,255,1) 99%);
+    color: white;
+    font-family: Arial, sans-serif;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    text-align: center;
+    height: 100%;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1.2em;
+}
